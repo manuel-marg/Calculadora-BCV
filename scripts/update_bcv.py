@@ -26,37 +26,34 @@ def fetch_exchange_rates():
     
     soup = BeautifulSoup(response.text, 'html.parser')
     
-    # Buscar tablas con las tasas de cambio
-    # En el sitio del BCV, las tasas se muestran en tablas con css específicas
+    # Buscar las tasas usando la estructura proporcionada
     rates = {}
     try:
-        # Extract USD rate
-        usd_elements = soup.find_all('td', string=re.compile(r'Dólar.*'))
-        eur_elements = soup.find_all('td', string=re.compile(r'Euro.*'))
+        # Extraer la tasa del USD
+        dolar_div = soup.find('div', id='dolar')
+        if dolar_div:
+            usd_strong = dolar_div.find('strong', class_='strong-tb')
+            if usd_strong:
+                # El texto puede tener comas como separador decimal, lo reemplazamos por punto
+                usd_text = usd_strong.get_text().strip()
+                # Reemplazar coma por punto para convertir a float
+                usd_rate = float(usd_text.replace(',', '.'))
+                rates['USD'] = usd_rate
         
-        # También puede estar en un formato de tabla simple
-        tables = soup.find_all('table')
-        for table in tables:
-            rows = table.find_all('tr')
-            for row in rows:
-                cells = row.find_all(['td', 'th'])
-                if len(cells) >= 2:
-                    # Buscar en ambas columnas
-                    for i, cell in enumerate(cells):
-                        text = ' '.join(cell.stripped_strings)
-                        if re.search(r'Dólar|USD', text, re.IGNORECASE):
-                            # La tasa suele estar en la misma fila siguiente la descripción
-                            rate_text = re.search(r'[\d,.]+', text)
-                            if rate_text:
-                                rates['USD'] = float(rate_text.group().replace(',', '.'))
-                        elif re.search(r'Euro|EUR', text, re.IGNORECASE):
-                            rate_text = re.search(r'[\d,.]+', text)
-                            if rate_text:
-                                rates['EUR'] = float(rate_text.group().replace(',', '.'))
+        # Extraer la tasa del EUR
+        euro_div = soup.find('div', id='euro')
+        if euro_div:
+            eur_strong = euro_div.find('strong', class_='strong-tb')
+            if eur_strong:
+                eur_text = eur_strong.get_text().strip()
+                eur_rate = float(eur_text.replace(',', '.'))
+                rates['EUR'] = eur_rate
         
-        # Fallback si no se encontró en los elementos específicos
-        if not rates:
-            rates = {'USD': 36.50, 'EUR': 39.10}  # Tasas de ejemplo
+        # Si no se encontró alguna tasa, usar valores de respaldo (por si la estructura cambia)
+        if 'USD' not in rates:
+            rates['USD'] = 36.50  # Valor por defecto
+        if 'EUR' not in rates:
+            rates['EUR'] = 39.10  # Valor por defecto
             
     except Exception as e:
         print(f"Error al parsear HTML: {e}")
