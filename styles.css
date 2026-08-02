@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333333;
+}
+body {
+    background: #ffffff;
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 20px;
+}
+.container {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+header h1 {
+    font-size: 1.8rem;
+    color: #0d6efd;
+    margin-bottom: 8px;
+}
+header p {
+    font-size: 1rem;
+    color: #5c8bd9;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057;
+}
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: white;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+}
+.swap-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+}
+.swap-btn:hover {
+    background-color: #dee2e6;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: #e9ecef;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+.input-group input {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-right: 15px;
+    background: white;
+}
+.input-group input:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 126, 255, 0.25);
+}
+.input-group span {
+    font-weight: 600;
+    color: #495057;
+}
+.rate-info {
+    text-align: center;
+    margin-top: 20px;
+    color: #5c8bd9;
+    font-style: italic;
+}
+.rate-info.spent {
+    color: #e35959;
+}
+[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+}</think>

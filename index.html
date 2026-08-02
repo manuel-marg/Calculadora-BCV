@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora BCV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Calculadora de Divisas BCV</h1>
+            <p>Conversor oficial USD/EUR a VES</p>
+        </header>
+        
+        <main>
+            <div class="form-group">
+                <label for="date">Fecha:</label>
+                <input type="date" id="date" value="">
+            </div>
+            
+            <div class="form-group">
+                <label for="currency">Moneda:</label>
+                <select id="currency">
+                    <option value="USD">Dólar (USD)</option>
+                    <option value="EUR">Euro (EUR)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <button id="swapBtn" class="swap-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 10h14M5 14h14M12 5v9M17 10L12 15L7 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="input-group">
+                <input type="number" id="amountFrom" placeholder="0.00" min="0" step="0.01">
+                <span id="currencyFrom">USD</span>
+            </div>
+            
+            <div class="input-group">
+                <input type="number" id="amountTo" placeholder="0.00" min="0" step="0.01" readonly>
+                <span id="currencyTo">VES</span>
+            </div>
+            
+            <div class="rate-info">
+                <small id="rateLabel">Tasa del día seleccionada: Cargando...</small>
+            </div>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

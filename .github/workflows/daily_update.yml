@@ -1,0 +1,42 @@
+name: Daily BCV Rate Update
+
+on:
+  schedule:
+    - cron: '0 20 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-rates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Run BCV scraper
+        run: python scripts/update_bcv.py
+        env:
+          TZ: America/Caracas
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push if changed
+        run: |
+          git add data/rates.json
+          git diff --staged --quiet && git diff --quiet || git commit -m "Actualizar tasas BCV - $(date +%Y-%m-%d)"
+          git push
