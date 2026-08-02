@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const dateInput = document.getElementById('date');
     const currencySelect = document.getElementById('currency');
-    const swapBtn = document.getElementById('swapBtn');
     const amountFrom = document.getElementById('amountFrom');
     const amountTo = document.getElementById('amountTo');
     const currencyFromDynamic = document.getElementById('currencyFromDynamic');
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const rateLabel = document.getElementById('rateLabel');
 
     let ratesData = {};
-    let isReverse = false;
     let currentRate = null;
 
     dateInput.valueAsDate = new Date();
@@ -83,41 +81,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!currentRate) return;
 
         const fromValue = parseFloat(amountFrom.value) || 0;
-        let result;
-
-        if (isReverse) {
-            result = fromValue / currentRate;
-        } else {
-            result = fromValue * currentRate;
-        }
+        const result = fromValue * currentRate;
 
         amountTo.value = result.toFixed(2);
-    }
-
-    function swap() {
-        isReverse = !isReverse;
-
-        if (isReverse) {
-            currencyFromLabel.textContent = currencySelect.value;
-            currencyToLabel.textContent = 'VES';
-            amountFrom.placeholder = '0.00';
-            amountTo.placeholder = '0.00';
-            amountFrom.removeAttribute('readonly');
-            amountTo.setAttribute('readonly', true);
-        } else {
-            currencyFromLabel.textContent = currencySelect.value;
-            currencyToLabel.textContent = 'VES';
-            amountFrom.placeholder = '0.00';
-            amountTo.placeholder = '0.00';
-            amountFrom.removeAttribute('readonly');
-            amountTo.setAttribute('readonly', true);
-        }
-
-        const temp = amountFrom.value;
-        amountFrom.value = amountTo.value;
-        amountTo.value = temp;
-
-        calculate();
     }
 
     dateInput.addEventListener('change', () => {
@@ -131,8 +97,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const rateData = findClosestRate(selectedDate);
         updateRateDisplay(rateData);
     });
-
-    swapBtn.addEventListener('click', swap);
 
     amountFrom.addEventListener('input', calculate);
 
