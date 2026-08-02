@@ -1,56 +1,215 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora BCV</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-tertiary-fixed": "#001e2f",
+                        "inverse-on-surface": "#eff1f3",
+                        "inverse-primary": "#aec6ff",
+                        "on-secondary-container": "#586377",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-tertiary-container": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "primary": "#0058c3",
+                        "outline": "#727786",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#c1c6d7",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-primary-fixed": "#001a43",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "secondary-container": "#d5e0f8",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eceef0",
+                        "inverse-surface": "#2d3133",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed-dim": "#aec6ff",
+                        "secondary": "#545f73",
+                        "on-primary-container": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "on-surface": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#007eb4",
+                        "surface-tint": "#0059c5",
+                        "on-surface-variant": "#414754",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary": "#00648f",
+                        "on-primary-fixed-variant": "#004397",
+                        "on-background": "#191c1e",
+                        "background": "#f7f9fb",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-container": "#0070f3",
+                        "surface-container-high": "#e6e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "md": "24px",
+                        "xl": "80px",
+                        "xs": "4px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "container-max": "480px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Hanken_Grotesk", "sans-serif"],
+                        "headline-md": ["Hanken_Grotesk", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "data-mono": ["JetBrains_Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem" }],
+                        "headline-md": ["1.125rem", { "lineHeight": "1.75rem" }],
+                        "body-md": ["1rem", { "lineHeight": "1.5rem" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1rem" }],
+                        "data-mono": ["0.875rem", { "lineHeight": "1.25rem" }],
+                        "text-lg": ["1.125rem", { "lineHeight": "1.75rem" }]
+                    },
+                    "fontWeight": {
+                        "headline-lg-mobile": "700",
+                        "headline-md": "600",
+                        "body-md": "400",
+                        "label-caps": "500",
+                        "data-mono": "500"
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Calculadora de Divisas BCV</h1>
-            <p>Conversor oficial USD/EUR a VES</p>
+    <div class="flex min-h-screen flex-col items-center justify-center bg-surface p-4">
+        <!-- Header Section with Brand Context -->
+        <header class="mb-lg w-full max-w-[480px]">
+            <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Calculadora de Divisas BCV</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Conversor oficial USD/EUR a VES</p>
         </header>
-        
-        <main>
-            <div class="form-group">
-                <label for="date">Fecha:</label>
-                <input type="date" id="date" value="">
+        <!-- Main Converter Card -->
+        <div class="bg-surface-container-lowest rounded-xl shadow-md p-md relative overflow-hidden w-full max-w-[480px]">
+            <!-- Decorative background glow -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+            <!-- Controls Row: Date & Currency Selection -->
+            <div class="grid grid-cols-2 gap-sm mb-md relative z-10">
+                <div class="flex flex-col gap-xs">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Fecha de Tasa</label>
+                    <div class="flex items-center gap-xs bg-surface-container-low px-sm py-base rounded-lg text-on-surface">
+                        <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                        <input type="date" id="date" class="font-data-mono text-data-mono w-full bg-transparent border-none outline-none" value="">
+                    </div>
+                </div>
+                <div class="flex flex-col gap-xs">
+                    <label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Moneda</label>
+                    <div class="flex items-center justify-between bg-surface-container-low px-sm py-base rounded-lg text-on-surface w-full">
+                        <div class="flex-1">
+                            <select id="currency" class="w-full bg-transparent border-none outline-none font-body-md text-body-md font-medium pl-0 appearance-none">
+                                <option value="USD">Dólar (USD)</option>
+                                <option value="EUR">Euro (EUR)</option>
+                            </select>
+                        </div>
+                        <span class="material-symbols-outlined text-[18px]">expand_more</span>
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="currency">Moneda:</label>
-                <select id="currency">
-                    <option value="USD">Dólar (USD)</option>
-                    <option value="EUR">Euro (EUR)</option>
-                </select>
+            <!-- Conversion Inputs Container -->
+            <div class="flex flex-col gap-sm relative">
+                <!-- Base Currency Input -->
+                <div class="group transition-all duration-200">
+                    <div class="flex items-center justify-between mb-xs">
+                        <span class="font-label-caps text-label-caps text-on-surface-variant">Tengo</span>
+                        <span id="currencyFromDynamic" class="font-label-caps text-label-caps text-primary">USD</span>
+                    </div>
+                    <div class="flex items-center bg-surface-container px-md py-md rounded-xl transition-shadow group-within:shadow-[0_0_0_2px_rgba(0,88,195,0.1)] group-within:bg-white group-within:ring-1 group-within:ring-primary/20">
+                        <input class="w-full bg-transparent border-none outline-none font-headline-lg-mobile text-headline-lg-mobile text-on-surface" type="number" id="amountFrom" placeholder="0.00" min="0" step="0.01"/>
+                        <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center ml-base">
+                            <span class="material-symbols-outlined text-on-surface-variant text-[20px]">attach_money</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Swap Button (Floating) -->
+                <div class="flex justify-center -my-3 relative z-20">
+                    <button class="w-10 h-10 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-transform" id="swapBtn">
+                        <span class="material-symbols-outlined text-[20px]">swap_vert</span>
+                    </button>
+                </div>
+                <!-- Target Currency Input -->
+                <div class="group transition-all duration-200">
+                    <div class="flex items-center justify-between mb-xs">
+                        <span class="font-label-caps text-label-caps text-on-surface-variant">Recibo (Estimado)</span>
+                        <span id="currencyToDynamic" class="font-label-caps text-label-caps text-primary">VES</span>
+                    </div>
+                    <div class="flex items-center bg-surface-container px-md py-md rounded-xl transition-shadow group-within:shadow-[0_0_0_2px_rgba(0,88,195,0.1)] group-within:bg-white group-within:ring-1 group-within:ring-primary/20">
+                        <input class="w-full bg-transparent border-none outline-none font-headline-lg-mobile text-headline-lg-mobile text-on-surface" type="number" id="amountTo" placeholder="0.00" min="0" step="0.01" readonly/>
+                        <div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center ml-base">
+                            <span class="font-label-caps text-label-caps text-on-surface-variant">Bs</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <button id="swapBtn" class="swap-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 10h14M5 14h14M12 5v9M17 10L12 15L7 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
+            <!-- Rate Info Footer -->
+            <div class="mt-md pt-md border-t border-surface-container-highest flex items-center gap-sm">
+                <div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center">
+                    <span class="material-symbols-outlined text-on-secondary-container">trending_up</span>
+                </div>
+                <div>
+                    <p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tasa del día seleccionado</p>
+                    <p id="rateLabel" class="font-data-mono text-data-mono text-primary text-lg">0.00 VES</p>
+                </div>
             </div>
-            
-            <div class="input-group">
-                <input type="number" id="amountFrom" placeholder="0.00" min="0" step="0.01">
-                <span id="currencyFrom">USD</span>
-            </div>
-            
-            <div class="input-group">
-                <input type="number" id="amountTo" placeholder="0.00" min="0" step="0.01" readonly>
-                <span id="currencyTo">VES</span>
-            </div>
-            
-            <div class="rate-info">
-                <small id="rateLabel">Tasa del día seleccionada: Cargando...</small>
-            </div>
-        </main>
+        </div>
+        <!-- Action Buttons -->
+        <div class="mt-lg grid grid-cols-2 gap-sm mb-xl w-full max-w-[480px]">
+            <button class="flex items-center justify-center gap-xs bg-surface-container-high text-on-surface py-md rounded-xl font-label-caps text-label-caps">
+                <span class="material-symbols-outlined text-[18px]">share</span> COMPARTIR
+            </button>
+            <button class="flex items-center justify-center gap-xs bg-primary text-on-primary py-md rounded-xl font-label-caps text-label-caps shadow-md">
+                <span class="material-symbols-outlined text-[18px]">history</span> HISTORIAL
+            </button>
+        </div>
+        <script src="app.js"></script>
     </div>
-    
-    <script src="app.js"></script>
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary">
+        <div class="h-16 flex items-center justify-around">
+            <a aria-current="page" class="flex flex-col items-center gap-xs transition-colors text-primary" data-path="converter" href="#">
+                <span class="material-symbols-outlined">currency_exchange</span>
+                <span class="font-label-caps text-label-caps">Conversor</span>
+            </a>
+            <a class="flex flex-col items-center gap-xs text-on-surface-variant transition-colors" data-path="rates-history" href="#">
+                <span class="material-symbols-outlined">monitoring</span>
+                <span class="font-label-caps text-label-caps">Tasas</span>
+            </a>
+            <a class="flex flex-col items-center gap-xs text-on-surface-variant transition-colors" data-path="settings" href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-caps text-label-caps">Ajustes</span>
+            </a>
+        </div>
+    </nav>
 </body>
 </html>

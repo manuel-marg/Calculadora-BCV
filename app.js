@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const swapBtn = document.getElementById('swapBtn');
     const amountFrom = document.getElementById('amountFrom');
     const amountTo = document.getElementById('amountTo');
-    const currencyFromLabel = document.getElementById('currencyFrom');
-    const currencyToLabel = document.getElementById('currencyTo');
+    const currencyFromDynamic = document.getElementById('currencyFromDynamic');
+    const currencyToDynamic = document.getElementById('currencyToDynamic');
     const rateLabel = document.getElementById('rateLabel');
 
     let ratesData = {};
