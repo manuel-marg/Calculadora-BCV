@@ -20,15 +20,14 @@ Puedes ver la aplicación funcionando en: `https://[TU-USUARIO].github.io/[NOMBR
 
 ```
 Calculadora-BCV/
-├── index.html          # Estructura HTML de la calculadora
-├── styles.css          # Estilos CSS mobile-first
-├── app.js              # Lógica de la calculadora y consumo del JSON
-├── README.md           # Este archivo de documentación
+├── index.html                # Estructura HTML con Tailwind CSS
+├── app.js                    # Lógica de la calculadora y consumo del JSON
+├── README.md                 # Este archivo de documentación
 ├── data/
-│   └── rates.json      # Base de datos de tasas históricas (YYYY-MM-DD: {USD, EUR})
+│   └── rates.json            # Base de datos de tasas históricas (YYYY-MM-DD: {USD, EUR})
 ├── scripts/
-│   ├── update_bcv.py   # Script de scraping del BCV en Python
-│   └── requirements.txt # Dependencias de Python
+│   ├── update_bcv.py         # Script de scraping del BCV en Python
+│   └── requirements.txt      # Dependencias de Python
 └── .github/
     └── workflows/
         └── daily_update.yml  # Workflow de GitHub Actions
@@ -38,7 +37,9 @@ Calculadora-BCV/
 
 ### Frontend
 - **HTML5**: Estructura semántica y accesible
-- **CSS3**: Mobile-first, sin frameworks (Sass, Bootstrap, etc.)
+- **Tailwind CSS 3.x**: Framework utility-first para UI moderna y responsive (vía CDN)
+- **Material Design Icons**: Iconos vectoriales
+- **Google Fuentes**: Hanken Grotesk, Inter, JetBrains Mono
 - **Vanilla JavaScript**: Sin frameworks ni librerías externas
 
 ### Backend/Automatización
@@ -196,30 +197,42 @@ function swap() {
 
 ## 📝 Personalización
 
-### Cambiar estilo del tema
+### Cambiar colores del tema
 
-Edita `styles.css` y modifica:
-- Colores en variables de color
-- Tipografías en `font-family`
-- Espaciado en `padding` y `margin`
+Edita el bloque `tailwind.config` en `index.html` dentro del `<script id="tailwind-config">`:
+
+```javascript
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#0058c3",      // Cambiar color principal
+                "surface": "#f7f9fb",       // Fondo
+                "on-surface": "#191c1e",  // Texto principal
+                // Más colores disponibles...
+            }
+        }
+    }
+}
+```
 
 ### Agregar nuevas monedas
 
 1. Modifica `data/rates.json` para incluir la nueva moneda:
-   ```json
-   {
-       "2026-08-01": {
-           "USD": 36.50,
-           "EUR": 39.10,
-           "OTH": 45.00
-       }
-   }
-   ```
+    ```json
+    {
+        "2026-08-01": {
+            "USD": 36.50,
+            "EUR": 39.10,
+            "OTH": 45.00
+        }
+    }
+    ```
 
 2. Agrega opción en `select` del HTML:
-   ```html
-   <option value="OTH">Otra Moneda</option>
-   ```
+    ```html
+    <option value="OTH">Otra Moneda</option>
+    ```
 
 ### Modificar el scraper
 
